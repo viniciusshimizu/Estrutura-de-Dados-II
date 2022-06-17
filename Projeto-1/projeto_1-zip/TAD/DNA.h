@@ -1,11 +1,14 @@
+#include <stdio.h>
+#ifndef DNA_H
+#define DNA_H
 
 
+void OrdenaDigitos(int A[][], long int n, int posicao);
 
-void OrdenaDigitos(A, n, posicao);
-void OrdenaNumeros(A,n);
-??? ContagemIntersecoes( arquivo A, arquivo B, nA, nB, arquivo saida)
+void OrdenaNumeros(int A, long int n);
 
-??? CtrlF(arquivo texto, arquivo trechos, arquivo saida)
+void ContagemIntersecoes(FILE *arquivo_A, FILE *arquivo_B, long int nA, long int nB, FILE *arquivo_saida);
 
+void CtrlF(FILE *arquivo_texto, FILE *arquivo_trechos, FILE *arquivo_saida);
 
-
+#endif
