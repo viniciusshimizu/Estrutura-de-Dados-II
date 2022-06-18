@@ -8,16 +8,16 @@
 int main(){
 	FILE *genoma, *pos_gen, *frag, *pos_frag, *ativ_genetica;
 	
-	genoma = fopen("./projeto_1_dados/genoma_grande.txt", "r");
+	genoma = fopen("./projeto_1_dados/genoma_medio.txt", "r");
     assert(genoma != NULL);
 	pos_gen = fopen("./projeto_1_dados/pos_genes_grande.csv", "r");
     assert(pos_gen != NULL);
-	frag = fopen("./projeto_1_dados/fragmentos_pequeno.txt", "r");
+	frag = fopen("./projeto_1_dados/fragmentos_grande.txt", "r");
     assert(frag != NULL);
-	pos_frag = fopen("./projeto_1_dados/pos_frag_pequeno.csv", "a+");
-    assert(pos_frag != NULL);
-	ativ_genetica = fopen("./resultados/pos_frag_pequeno.txt", "w");
-    assert(ativ_genetica != NULL);
+	pos_frag = fopen("./resultados/pos_frag_grande3_2.csv", "w+");
+    assert(pos_frag != NULL);///
+	ativ_genetica = fopen("./resultados/ariv_genoma_medio3_2.txt", "w");
+    assert(ativ_genetica != NULL);////
 
 	ContagemLeituras(
 		genoma,
@@ -25,7 +25,7 @@ int main(){
 		frag,
 		pos_frag,
 		10000,
-		300,
+		30000,
 		ativ_genetica
 	);
 	

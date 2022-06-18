@@ -3,11 +3,11 @@
 #define DNA_H
 
 
-void OrdenaDigitos(int A[][2], long int n, int posicao);
+void OrdenaDigitos(int A[][2], long n, int posicao);
 
-void OrdenaNumeros(int A[][2], long int n);
+void OrdenaNumeros(int A[][2], long n);
 
-void ContagemIntersecoes(FILE *arquivo_A, FILE *arquivo_B, long int nA, long int nB, FILE *arquivo_saida);
+void ContagemIntersecoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, FILE *arquivo_saida);
 
 void CtrlF(FILE *arquivo_texto, FILE *arquivo_trechos, FILE *arquivo_saida);
 
