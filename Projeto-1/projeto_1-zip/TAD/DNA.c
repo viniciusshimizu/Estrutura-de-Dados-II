@@ -6,10 +6,30 @@
 
 // FUNCOES INTERNAS PARA O TAD
 long int _DNA_max_(long int a, long int b){
-	return a > b ? a : b;
+	return a < b ? b : a;
 }
 
 // FUNCOES DO TAD
+
+DNA *criar_DNA(FILE *genoma, FILE *pos_genes, FILE *fragmentos){
+	DNA dna;
+	int tamanho_buffer;
+	// calculando o tamnho do genoma para alocacao de memoria
+	fseek(genoma, 0, SEEK_END);
+  	tamanho_buffer = ftell(genoma);
+  	rewind(genoma);
+	
+	dna->genoma = (char *) malloc(sizeof(char)*tamanho_buffer);
+	assert(dna->genoma != NULL);
+	fread(dna->genoma, sizeof(char), tamanho_buffer, genoma);
+
+
+	
+	
+	
+}
+
+
 
 void OrdenaDigitos(int A[][2], long int n, int posicao){
 	// 	Entrada: A, matriz com duplas de numeros a serem ordenadas.

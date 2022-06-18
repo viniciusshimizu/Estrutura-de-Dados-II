@@ -4,6 +4,11 @@
 #include <assert.h>
 #include "DNA.h"
 
+typedef struct DNA{
+	char *genoma;
+	long 
+};
+
 
 int main(){
 	FILE *genoma, *pos_gen, *frag, *pos_frag, *ativ_genetica;

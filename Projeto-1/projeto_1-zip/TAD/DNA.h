@@ -1,6 +1,17 @@
-#include <stdio.h>
 #ifndef DNA_H
 #define DNA_H
+
+typedef struct DNA{
+	char *genoma;
+
+	long **pos_genes;
+	int n_genes;
+
+	char **fragmentos;
+	long **pos_fragmentos;
+	int n_fragmentos;
+
+};
 
 
 void OrdenaDigitos(int A[][2], long n, int posicao);
