@@ -10,7 +10,8 @@ long int _DNA_max_(long int a, long int b){
 }
 
 // FUNCOES DO TAD
-void OrdenaDigitos(int A[][], long int n, int posicao){
+
+void OrdenaDigitos(int A[][2], long int n, int posicao){
 	// 	Entrada: A, matriz com duplas de numeros a serem ordenadas.
 	// Entrada: n, numero de linhas em A.
 	// Entrada: posicao, posicao do dıgito a se considerar (10, 100, 1000, etc.).
@@ -48,9 +49,10 @@ void OrdenaDigitos(int A[][], long int n, int posicao){
 		A[i][1] = C[i][1];
 	}
 
+	printf("ord d ok\n");
 }
 
-void OrdenaNumeros(int A, long int n){
+void OrdenaNumeros(int A[][2], long int n){
 
 	// Entrada: A[n][2], vetor com pares de numeros a serem ordenados.
 	// Entrada: n, numero de elementos em A.
@@ -66,6 +68,7 @@ void OrdenaNumeros(int A, long int n){
 		OrdenaDigitos(A, n, posicao);
 		posicao *= 10;
 	}
+	printf("ord n ok\n");
 }
 
 void ContagemIntersecoes(FILE *arquivo_A, FILE *arquivo_B, long int nA, long int nB, FILE *arquivo_saida){
@@ -108,14 +111,14 @@ void ContagemIntersecoes(FILE *arquivo_A, FILE *arquivo_B, long int nA, long int
 	}
 
 	for(i = 0; i < nA; ++i){
-		putw(contagens[i], arquivo_saida)
+		putw(contagens[i], arquivo_saida);
 	}
+	printf("contagem ok\n");
 }
 
 void CtrlF(FILE *arquivo_texto, FILE *arquivo_trechos, FILE *arquivo_saida){
-	char *texto, *trecho[5000];
+	char *texto, trecho[5000];
 	long int tamanho_buffer, inicio, fim;
-	
 	
 	
 	fseek(arquivo_texto, 0, SEEK_END);
@@ -127,10 +130,28 @@ void CtrlF(FILE *arquivo_texto, FILE *arquivo_trechos, FILE *arquivo_saida){
 	fread(texto, sizeof(char), tamanho_buffer, arquivo_texto);
 	assert(texto != NULL);
 
-	while(fgets(trecho, 5000, arquivo_trechos) != EOF){
+	while(fgets(trecho, 5000, arquivo_trechos) != NULL){
 		inicio = strstr(texto, trecho) - texto;
 		fim = inicio + strlen(trecho);
-		fprintf(arquivo_saida, "%lf,%lf\n", inicio, fim);
+		fprintf(arquivo_saida, "%ld,%ld\n", inicio, fim);
 	}
+
+	free(texto);
+	printf("ctrf ok\n");
 	
 }
+
+void ContagemLeituras(
+	FILE *genoma,
+	FILE *pos_genes,
+	FILE *fragmentos,
+	FILE *pos_fragmentos,
+	long n_genes,
+	long n_fragmentos,
+	FILE *saida){
+	
+		CtrlF( genoma, fragmentos, pos_fragmentos);
+
+		ContagemIntersecoes(pos_genes, pos_fragmentos, n_genes, n_fragmentos, saida);
+		
+	}
