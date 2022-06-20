@@ -5,13 +5,13 @@
 #include <assert.h>
 
 // FUNCOES INTERNAS PARA O TAD
-long int _DNA_max_(long a, long b){
+int _DNA_max_(int a, int b){
 	return a < b ? b : a;
 }
 
 // FUNCOES DO TAD
 
-DNA *criar_DNA(char *genoma, char *pos_genes, char *fragmentos, long n_genes, long n_fragmentos){
+DNA *criar_DNA(char *genoma, char *pos_genes, char *fragmentos, int n_genes, int n_fragmentos){
     DNA *dna;
 
     dna = (DNA *)malloc(sizeof(DNA));
@@ -53,15 +53,15 @@ int destruir_DNA(DNA *dna){
     return 0;
 }
 
-void OrdenaDigitos(long A[][2], long n, long posicao){
+void OrdenaDigitos(int A[][2], int n, int posicao){
 	// 	Entrada: A, matriz com duplas de numeros a serem ordenadas.
 	// Entrada: n, numero de linhas em A.
 	// Entrada: posicao, posicao do dıgito a se considerar (10, 100, 1000, etc.).
 	// Saıda: A ordenado a partir do dıgito em posicao.
 
-	long B[10], C[n][2];
-	long digito;
-	long i;
+	int B[10], C[n][2];
+	int digito;
+	int i;
 	
 	for( i = 0; i < 10; ++i){
 		B[i] = 0;
@@ -94,15 +94,15 @@ void OrdenaDigitos(long A[][2], long n, long posicao){
 
 }
 
-void OrdenaDigitos_p(long **A, long n, long posicao){
+void OrdenaDigitos_p(int **A, int n, int posicao){
 	// 	Entrada: A, matriz com duplas de numeros a serem ordenadas.
 	// Entrada: n, numero de linhas em A.
 	// Entrada: posicao, posicao do dıgito a se considerar (10, 100, 1000, etc.).
 	// Saıda: A ordenado a partir do dıgito em posicao.
 
-	long B[10], C[n][2];
-	long digito;
-	long i;
+	int B[10], C[n][2];
+	int digito;
+	int i;
 	
 	for( i = 0; i < 10; ++i){
 		B[i] = 0;
@@ -135,14 +135,14 @@ void OrdenaDigitos_p(long **A, long n, long posicao){
 
 }
 
-void OrdenaNumeros(long A[][2], long n){
+void OrdenaNumeros(int A[][2], int n){
 
 	// Entrada: A[n][2], vetor com pares de numeros a serem ordenados.
 	// Entrada: n, numero de elementos em A.
 	// Saida: A ordenado pelo primeiro elemento de cada par.
 	
-	long posicao = 1, maior = A[n-1][0];
-	long i;
+	int posicao = 1, maior = A[n-1][0];
+	int i;
 	for(i = 0; i < n ; ++i){
 		maior = _DNA_max_(A[i][0], A[i+1][0]);
 	}
@@ -154,19 +154,18 @@ void OrdenaNumeros(long A[][2], long n){
 
 }
 
-void OrdenaNumeros_p(long **A, long n){
+void OrdenaNumeros_p(int **A, int n){
 
 	// Entrada: A[n][2], vetor com pares de numeros a serem ordenados.
 	// Entrada: n, numero de elementos em A.
 	// Saida: A ordenado pelo primeiro elemento de cada par.
 	
-	long posicao = 1, maior = A[n-1][0];
-	long i;
+	int posicao = 1, maior = A[n-1][0];
+	int i;
 
 	for(i = 0; i < n-1 ; ++i){
 		maior = _DNA_max_(A[i][0], A[i+1][0]);
 	}
-    printf("teste antes while\n");
 	while((maior/posicao) > 0){
 		OrdenaDigitos_p(A, n, posicao);
 		posicao *= 10;
@@ -174,7 +173,7 @@ void OrdenaNumeros_p(long **A, long n){
 
 }
 
-void ContagemIntersecoes(FILE *arquivo_A, long **B, long nA, long nB, FILE *arquivo_saida){
+void ContagemIntersecoes(FILE *arquivo_A, int **B, int nA, int nB, FILE *arquivo_saida){
 	// Entrada: A.txt e B.txt, nao ordenados
 	// Entrada: nA e nB, numeros de linhas em A e B, respectivamente.
 	// Saıda: contagens.txt, contagens de intervalos de B em cada intervalo de A
@@ -182,10 +181,10 @@ void ContagemIntersecoes(FILE *arquivo_A, long **B, long nA, long nB, FILE *arqu
 	rewind(arquivo_A);
 	//rewind(arquivo_B);
 	
-	long A[nA][2];//B[nB][2]
-	long contagens[nA];
+	int A[nA][2];//B[nB][2]
+	int contagens[nA];
 	char buffer[20];
-	long i, iA, iB, primeiro_iB = 0;
+	int i, iA, iB, primeiro_iB = 0;
 	
 	for(i = 0; i < nA; ++i){
 		contagens[nA] = 0;
@@ -196,11 +195,11 @@ void ContagemIntersecoes(FILE *arquivo_A, long **B, long nA, long nB, FILE *arqu
 		A[i][0] = atoi(strtok(buffer,","));
 		A[i][1] = atoi(strtok(NULL,","));
 	}
-    printf("a ok \n");
+
 	OrdenaNumeros (A, nA);
-    printf("ord a ok \n");
+
 	OrdenaNumeros_p (B, nB);
-	printf("ord b ok \n");
+
 	
 	for(iA = 0; iA < nA; ++iA){
 		for(iB = primeiro_iB; iB < nB; ++iB){
@@ -216,21 +215,20 @@ void ContagemIntersecoes(FILE *arquivo_A, long **B, long nA, long nB, FILE *arqu
 		}
 	}
 	for( i = 0; i < nA; ++i){
-		fprintf(arquivo_saida,"%ld\n",contagens[i]);
+		fprintf(arquivo_saida,"%d\n",contagens[i]);
 	}
 	
 	
-	printf("contagem ok\n");
 }
 
-long **CtrlF(FILE *arquivo_texto, FILE *arquivo_trechos, long n_fragmentos){
+int **CtrlF(FILE *arquivo_texto, FILE *arquivo_trechos, int n_fragmentos){
 	char *texto, trecho[5000];
-	long tamanho_buffer, inicio, fim, i; 
-    long **pos_fragmentos;
+	int tamanho_buffer, inicio, fim, i; 
+    int **pos_fragmentos;
 
-    pos_fragmentos = (long **)malloc(sizeof(long *) * n_fragmentos);
+    pos_fragmentos = (int **)malloc(sizeof(int *) * n_fragmentos);
     for(i = 0; i < n_fragmentos; ++i){
-        pos_fragmentos[i] = (long *)malloc(sizeof(long) * 2);
+        pos_fragmentos[i] = (int *)malloc(sizeof(int) * 2);
     }
 	
 	fseek(arquivo_texto, 0, SEEK_END);
